@@ -10,8 +10,12 @@ def reverse_integer(x):
 
     temp = x
     while x > y:
+        adder = (x % y) * (10 ** (length - 1))
         result = result + (x % y) * (10 ** (length - 1))
-        y = y * 10
+        x = x - adder
+        print(adder)
+        print(x)
+        y = y* 10
         print(result)
         length = length - 1
         print(length)
