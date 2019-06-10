@@ -12,6 +12,7 @@ class Main {
   public static double posAverage(String s) {
     double overallLength = 0;
     double similarities = 0;
+    double numSubStrings = 0;
     double result = 0;
     DecimalFormat df = new DecimalFormat("##.##########");
 
@@ -19,14 +20,15 @@ class Main {
     String[] splitted = s.split(", ");
 
     for(String countStr : splitted) {
+      numSubStrings++;
       for(String countChar : countStr.split("")) {
         overallLength++;
       }
     }
-    overallLength = (overallLength * (overallLength - 1)) / 2;
+    overallLength = ((numSubStrings * (numSubStrings - 1)) / 2) * (overallLength / numSubStrings);
 
     for(int i = 0; i < splitted.length; i++) {
-      for(int y = 0; y < splitted.length; y++) {
+      for(int y = i + 1; y < splitted.length; y++) {
         if(y == i) {
           continue;
         }
@@ -65,7 +67,7 @@ class Main {
   @Test
   public static void test() {
       assertFuzzy("466960, 069060, 494940, 060069, 060090, 640009, 496464, 606900, 004000, 944096", 26.6666666667);
-      // assertFuzzy("444996, 699990, 666690, 096904, 600644, 640646, 606469, 409694, 666094, 606490", 29.2592592593);
+      assertFuzzy("444996, 699990, 666690, 096904, 600644, 640646, 606469, 409694, 666094, 606490", 29.2592592593);
       assertFuzzy("4444444, 4444444, 4444444, 4444444, 4444444, 4444444, 4444444, 4444444", 100);
       assertFuzzy("0, 0, 0, 0, 0, 0, 0, 0", 100);
   }
